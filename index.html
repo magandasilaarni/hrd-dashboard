@@ -216,10 +216,19 @@ updateDateTime();
         </div>
     </div>
 
-    <!-- CHART -->
-    <div class="mb-6">
-        <canvas id="processingChart" height="120"></canvas>
-    </div>
+   
+<!-- 📊 GRAPH -->
+<canvas id="processingChart" height="120"></canvas>
+
+
+    <!-- ✅ PROCESSING STATUS -->
+    <h5 class="text-sm font-semibold text-slate-600 mb-2">Processing Status</h5>
+    <div class="space-y-1 text-sm">
+
+        <div class="flex justify-between">
+            <span>Advisory</span>
+            <span class="text-green-600">43 / 63</span>
+        </div>
 
     <!-- TABLE HEADER -->
     <div class="grid grid-cols-4 text-xs font-semibold text-slate-500 border-b pb-2 mb-3">
@@ -606,64 +615,79 @@ new Chart(ctxProcessing, {
 </script>
 
 <script>
-async function loadPositionData() {
-    const res = await fetch("data.csv");
+
+async function loadProcessedDocs() {
+    const res = await fetch("documents.csv");
     const text = await res.text();
 
-    // ✅ Proper CSV parsing (handles quotes)
-    const rows = text.trim().split("\n").map(row => {
-        const result = [];
-        let current = '';
-        let insideQuotes = false;
+    const rows = text.trim().split("\n").slice(1);
 
-        for (let char of row) {
-            if (char === '"') {
-                insideQuotes = !insideQuotes;
-            } else if (char === ',' && !insideQuotes) {
-                result.push(current);
-                current = '';
-            } else {
-                current += char;
-            }
-        }
-        result.push(current);
-        return result;
-    });
+    const labels = [];
+    const processedData = [];
+    const totalData = [];
 
-    const header = rows[0];
-
-    const positionIndex = header.findIndex(h => h.trim().toLowerCase() === "position");
-    const countIndex = header.findIndex(h => h.trim().toLowerCase() === "total");
-
-    const container = document.getElementById("positionList");
+    const container = document.querySelector(".processing-list");
     container.innerHTML = "";
 
-    let total = 0;
+    rows.forEach(row => {
+        const [type, processed, total] = row.split(",");
 
-    rows.slice(1).forEach(row => {
-        const position = row[positionIndex]?.trim();
-        const count = Number(row[countIndex]);
+        labels.push(type);
+        processedData.push(Number(processed));
+        totalData.push(Number(total));
 
-        // ✅ Skip invalid rows
-        if (!position || position.toLowerCase().includes("grand total")) return;
-        if (isNaN(count)) return;
-
-        total += count;
-
+        // ✅ Dynamic UI
         container.innerHTML += `
-            <div class="flex justify-between bg-slate-50 p-2 rounded">
-                <span>${position}</span>
-                <span class="font-semibold">${count}</span>
+            <div class="flex justify-between processed-header">
+                <span>${type}</span>
+                <span>
+                    <span class="processed-count">${processed}</span> /
+                    <span class="processed-total">${total}</span>
+                </span>
             </div>
         `;
     });
 
-    document.getElementById("totalTrained").textContent = total.toLocaleString();
+    // ✅ Draw Chart
+    const ctx = document.getElementById('processingChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Processed',
+                    data: processedData,
+                    backgroundColor: '#22c55e'
+                },
+                {
+                    label: 'Total',
+                    data: totalData,
+                    backgroundColor: '#cbd5f5'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
 }
+
+loadProcessedDocs();
+
 
 loadPositionData();
 setInterval(loadPositionData, 5000);
 </script>
+
+//new code
 
 
 <script>
