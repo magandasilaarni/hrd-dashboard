@@ -122,15 +122,16 @@ setInterval(loadPositionData, 5000);
     <span class="material-symbols-outlined">groups</span> Rewards and Recognition
 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
-                    <span class="material-symbols-outlined">school</span> Learning and Dev
-                </a>
+                
                 <a href="#" id="processedDocsLink" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
                     <span class="material-symbols-outlined">analytics</span> Processed Documents
                 </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
                <!--     <span class="material-symbols-outlined">payments</span> Budget -->
                 </a>
+                <a href=# id="aboutHRDLink" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
+<span class="material-symbols-outlined">info</span> About HRD
+</a>
             </nav>
         </div>
         <!-- User Profile Bottom -->
@@ -922,6 +923,171 @@ container.innerHTML += `
 
 loadDocumentData();
 setInterval(loadDocumentData, 5000);
+</script>
+
+<script>
+document.getElementById("aboutHRDLink").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    document.getElementById("mainContent").innerHTML = `
+    
+    <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm">
+
+        <h1 class="text-3xl font-bold text-blue-700 mb-4">
+            About Human Resource Development (HRD)
+        </h1>
+
+        <p class="text-slate-600 mb-6">
+            The Human Resource Development Section is responsible for planning,
+            implementing, monitoring, and evaluating programs and activities that
+            enhance the competencies and professional growth of teaching and
+            non-teaching personnel in the Schools Division Office of Laguna.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <div class="bg-blue-50 p-5 rounded-lg">
+                <h3 class="font-bold text-blue-700 mb-2">Vision</h3>
+                <p>
+                    A highly competent, empowered, and future-ready workforce
+                    committed to excellence and continuous improvement.
+                </p>
+            </div>
+
+            <div class="bg-green-50 p-5 rounded-lg">
+                <h3 class="font-bold text-green-700 mb-2">Mission</h3>
+                <p>
+                    To provide relevant, responsive, and inclusive learning and
+                    development opportunities that promote professional growth
+                    and organizational effectiveness.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-8">
+            <div class="grid md:grid-cols-2 gap-4">
+                
+          <div class="mt-8 bg-slate-50 p-5 rounded-lg">   
+            <h2 class="text-xl font-bold text-slate-800 mb-4">
+                Core Functions of HRD
+            </h2>
+ 
+            <ul class="space-y-3 text-slate-700">
+                <li>✅ Conduct Training Needs Analysis (TNA)</li>
+                <li>✅ Develop and implement Learning and Development Programs</li>
+                <li>✅ Manage Scholarship and Professional Development Opportunities</li>
+                <li>✅ Maintain Training and Development Information System (TDIS)</li>
+                <li>✅ Monitor and Evaluate Learning and Development Programs</li>
+                <li>✅ Prepare Annual Training Calendars and Reports</li>
+                <li>✅ Support Career Development and Succession Planning</li>
+            </ul>
+            
+            </div>
+<div class="mt-8 bg-slate-50 p-6 rounded-lg">
+
+    <h2 class="text-xl font-bold text-slate-800 mb-8 text-center">
+        HRD Personnel
+    </h2>
+
+    <!-- SEPS and EPS II -->
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+
+        <!-- SEPS -->
+        <div class="bg-white p-5 rounded-xl shadow-sm text-center">
+
+            <img
+                src="images/seps.jpg"
+                alt="SEPS"
+                class="w-32 h-32 mx-auto rounded-full h3>
+
+            <p class="text-sm text-blue-600">
+ <h3 class="font-bold mt-4 text-slate-800">
+                Enrico G. Ortega, MaEd
+            </h3>                
+               <p class="text-sm text-green-600">
+Senior Education Program Specialist
+</p>
+        </div>
+
+        <!-- EPS II -->
+        <div class="bg-white p-5 rounded-xl shadow-sm text-center">
+
+           <img
+                src="images/eps2.jpg"
+                alt="SEPS"
+                class="w-32 h-32 mx-auto rounded-full h3>
+
+            <p class="text-sm text-blue-600">
+ <h3 class="font-bold mt-4 text-slate-800">
+                Laarni T. Estrada, MIT
+                </h3>                
+               <p class="text-sm text-green-600">
+Education Program Specialist II
+</p>
+        </div>
+
+    </div>
+
+    <!-- Clerk -->
+    <div class="flex justify-center">
+
+        <div class="bg-white p-5 rounded-xl shadow-sm text-center w-full md:w-80">
+
+            <img
+                src="images/clerk.jpg"
+                alt="Administrative Clerk"
+                class="w-32 </h3>
+
+            <p class="text-sm text-purple-600">
+                Administrative Clerk
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+            
+            </div>
+            
+            </div>
+        </div>
+
+        <div class="mt-8 bg-slate-50 p-5 rounded-lg">
+            <h2 class="text-xl font-bold text-slate-800 mb-3">
+                HRD Services
+            </h2>
+
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <span class="material-symbols-outlined text-blue-600">school</span>
+                    <p class="font-semibold">Training Management</p>
+                </div>
+
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <span class="material-symbols-outlined text-green-600">workspace_premium</span>
+                    <p class="font-semibold">Scholarship Programs</p>
+                </div>
+
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <span class="material-symbols-outlined text-purple-600">analytics</span>
+                    <p class="font-semibold">Training Records & Reports</p>
+                </div>
+
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <span class="material-symbols-outlined text-purple-600">analytics</span>
+                    <p class="font-semibold">Rewards and Recognition</p>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+
+    </div>
+    `;
+});
 </script>
 
 </body>
