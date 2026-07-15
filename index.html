@@ -343,13 +343,16 @@ updateDateTime();
     <!-- CHART SCRIPTS -->
     <script>
     
-let positionChartInstance = null;
+let positionChartInstance;
 
 async function loadPositionData() {
+    const loadingText = document.getElementById("chartLoading");
+    if (loadingText) loadingText.style.display = "block";
+
     const res = await fetch("data.csv?v=" + new Date().getTime());
     const text = await res.text();
 
-    const rows = text.trim().split("\n").map(row => row.split(","));
+    const rows = text.trim().split("\n").map(r => r.split(","));
     const header = rows[0];
 
     const positionIndex = header.findIndex(h => h.toLowerCase().includes("position"));
@@ -369,6 +372,33 @@ async function loadPositionData() {
         data.push(count);
         total += count;
     });
+
+    document.getElementById("totalTrained").textContent = total.toLocaleString();
+
+    const ctx = document.getElementById("positionChart").getContext("2d");
+
+    if (positionChartInstance) {
+        positionChartInstance.destroy();
+    }
+
+    positionChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                data,
+                backgroundColor: '#3b82f6'
+            }]
+        }
+    });
+
+    if (loadingText) loadingText.style.display = "none";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    loadPositionData();
+    setInterval(loadPositionData, 5000);
+});
 
     // ✅ Update total
     document.getElementById("totalTrained").textContent = total.toLocaleString();
@@ -591,6 +621,11 @@ document.getElementById("rewardsLink").addEventListener("click", function(e) {
             </div>
 
             <div class="bg-slate-700/40 p-3 rounded-lg">
+            <p class="text-white font-medium">Outstanding Researcher Award- Elementary</p>
+            <p class="text-slate-400 text-sm">Edlyn O. De Jesus</p>
+            </div>
+
+            <div class="bg-slate-700/40 p-3 rounded-lg">
             <p class="text-white font-medium">Outstanding Elementary School Head</p>
             <p class="text-slate-400 text-sm">Mylene M. Gutierrez</p>
             </div>
@@ -607,7 +642,7 @@ document.getElementById("rewardsLink").addEventListener("click", function(e) {
 
             <div class="bg-slate-700/40 p-3 rounded-lg">
             <p class="text-white font-medium">Outstanding Researcher Award (Secondary Level)</p>
-            <p class="text-slate-400 text-sm">John Michael R. Vicenta S. David</p>
+            <p class="text-slate-400 text-sm">John Michael R. Calderon</p>
             </div>
 
             <div class="bg-slate-700/40 p-3 rounded-lg">
@@ -721,45 +756,20 @@ new Chart(ctxProcessing, {
 </script>
 
 <script>
-async function loadPositionData() {
-    const res = await fetch("data.csv?v=" + new Date().getTime());
-    const text = await res.text();
-
-    // ✅ Proper CSV parsing (handles quotes)
-    const rows = text.trim().split("\n").map(row => {
-        const result = [];
-        let current = '';
-        let insideQuotes = false;
-
-        for (let char of row) {
-            if (char === '"') {
-                insideQuotes = !insideQuotes;
-            } else if (char === ',' && !insideQuotes) {
-                result.push(current);
-                current = '';
-            } else {
-                current += char;
-            }
-        }
-        result.push(current);
-        return result;
-    });
-
-    let positionChartInstance;
+let positionChartInstance = null;
 
 async function loadPositionData() {
     const res = await fetch("data.csv?v=" + new Date().getTime());
     const text = await res.text();
 
-    const rows = text.trim().split("\n").map(row => row.split(","));
+    const rows = text.trim().split("\n").map(r => r.split(","));
     const header = rows[0];
 
     const positionIndex = header.findIndex(h => h.toLowerCase().includes("position"));
     const countIndex = header.findIndex(h => h.toLowerCase().includes("total"));
 
-    const container = document.getElementById("positionList");
-    container.innerHTML = "";
-
+    let labels = [];
+    let data = [];
     let total = 0;
 
     rows.slice(1).forEach(row => {
@@ -768,105 +778,50 @@ async function loadPositionData() {
 
         if (!position || isNaN(count)) return;
 
+        labels.push(position);
+        data.push(count);
         total += count;
-
-        container.innerHTML += `
-            <div class="flex justify-between bg-slate-50 p-2 rounded">
-                <span>${position}</span>
-                <span class="font-semibold">${count}</span>
-            </div>
-        `;
     });
 
-    document.getElementById("totalTrained").textContent = total.toLocaleString();
-}
-
-loadPositionData();
-setInterval(loadPositionData, 5000);
-
-    // ✅ Update total
+    // ✅ update total
     document.getElementById("totalTrained").textContent = total.toLocaleString();
 
-    // ✅ Create chart
     const canvas = document.getElementById("positionChart");
-
     if (!canvas) return;
 
-    if (positionChartInstance) {
-        positionChartInstance.destroy();
-    }
-
-    const ctx = canvas.getContext("2d");
-
-    positionChartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Trained Personnel',
-                data: data,
-                backgroundColor: '#3b82f6',
-                borderRadius: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false }
+    // ✅ CREATE ONLY ONCE
+    if (!positionChartInstance) {
+        positionChartInstance = new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Trained Personnel',
+                    data: data,
+                    backgroundColor: '#3b82f6'
+                }]
             },
-            scales: {
-                x: {
-                    ticks: {
-                        autoSkip: false,
-                        maxRotation: 45,
-                        minRotation: 45
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: { precision: 0 }
-                }
+            options: {
+                responsive: true,
+                animation: false  // ✅ instant display
             }
-        }
-    });
+        });
+    } 
+    // ✅ UPDATE ONLY (NO RELOAD = NO DELAY)
+    else {
+        positionChartInstance.data.labels = labels;
+        positionChartInstance.data.datasets[0].data = data;
+        positionChartInstance.update();
+    }
 }
 
-loadPositionData();
-setInterval(loadPositionData, 5000);
+// ✅ LOAD ONCE → INSTANT
+window.addEventListener("DOMContentLoaded", () => {
+    loadPositionData();
+});
 
-    const header = rows[0];
-
-    const positionIndex = header.findIndex(h => h.trim().toLowerCase() === "position");
-    const countIndex = header.findIndex(h => h.trim().toLowerCase() === "total");
-
-    const container = document.getElementById("positionList");
-    container.innerHTML = "";
-
-    let total = 0;
-
-    rows.slice(1).forEach(row => {
-        const position = row[positionIndex]?.trim();
-        const count = Number(row[countIndex]);
-
-        // ✅ Skip invalid rows
-        if (!position || position.toLowerCase().includes("grand total")) return;
-        if (isNaN(count)) return;
-
-        total += count;
-
-        container.innerHTML += `
-            <div class="flex justify-between bg-slate-50 p-2 rounded">
-                <span>${position}</span>
-                <span class="font-semibold">${count}</span>
-            </div>
-        `;
-    });
-
-    document.getElementById("totalTrained").textContent = total.toLocaleString();
-}
-
-loadPositionData();
-setInterval(loadPositionData, 5000);
+// ✅ OPTIONAL REFRESH (slow, smooth)
+setInterval(loadPositionData, 15000);
 </script>
 
 
