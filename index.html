@@ -1,7 +1,7 @@
 
 <script>
 async function loadPositionData() {
-    const res = await fetch("data.csv");
+   const res = await fetch("data.csv?v=" + new Date().getTime());
     const text = await res.text();
 
     // ✅ Proper CSV parsing (handles quotes)
@@ -699,7 +699,7 @@ new Chart(ctxProcessing, {
 
 <script>
 async function loadPositionData() {
-    const res = await fetch("data.csv");
+    const res = await fetch("data.csv?v=" + new Date().getTime());
     const text = await res.text();
 
     // ✅ Proper CSV parsing (handles quotes)
@@ -725,7 +725,7 @@ async function loadPositionData() {
     let positionChartInstance;
 
 async function loadPositionData() {
-    const res = await fetch("data.csv");
+    const res = await fetch("data.csv?v=" + new Date().getTime());
     const text = await res.text();
 
     const rows = text.trim().split("\n").map(row => row.split(","));
@@ -734,8 +734,9 @@ async function loadPositionData() {
     const positionIndex = header.findIndex(h => h.toLowerCase().includes("position"));
     const countIndex = header.findIndex(h => h.toLowerCase().includes("total"));
 
-    let labels = [];
-    let data = [];
+    const container = document.getElementById("positionList");
+    container.innerHTML = "";
+
     let total = 0;
 
     rows.slice(1).forEach(row => {
@@ -744,10 +745,21 @@ async function loadPositionData() {
 
         if (!position || isNaN(count)) return;
 
-        labels.push(position);
-        data.push(count);
         total += count;
+
+        container.innerHTML += `
+            <div class="flex justify-between bg-slate-50 p-2 rounded">
+                <span>${position}</span>
+                <span class="font-semibold">${count}</span>
+            </div>
+        `;
     });
+
+    document.getElementById("totalTrained").textContent = total.toLocaleString();
+}
+
+loadPositionData();
+setInterval(loadPositionData, 5000);
 
     // ✅ Update total
     document.getElementById("totalTrained").textContent = total.toLocaleString();
