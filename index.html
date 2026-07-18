@@ -114,7 +114,7 @@ setInterval(loadPositionData, 5000);
             <nav class="p-4 space-y-1">
                 <a href="#" id="dashboardLink" class="flex items-center gap-3 px-4 py-3 bg-blue-600 text-white rounded-lg font-medium transition">
 
-                    <span class="material-symbols-outlined text-sm">dashboard</span> Dashboard
+                    <span class="material-symbols-outlined text-sm">dashboard</span> Trainings and Development
                 </a>
                 
                 
@@ -126,8 +126,9 @@ setInterval(loadPositionData, 5000);
                 <a href="#" id="processedDocsLink" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
                     <span class="material-symbols-outlined">analytics</span> Processed Documents
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
-               <!--     <span class="material-symbols-outlined">payments</span> Budget -->
+               
+                <a href="#" id="processedDocsLink" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
+                    <span class="material-symbols-outlined">analytics</span> Scholarship
                 </a>
                 <a href=# id="aboutHRDLink" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition">
 <span class="material-symbols-outlined">info</span> About HRD
@@ -965,6 +966,79 @@ container.innerHTML += `
 loadDocumentData();
 setInterval(loadDocumentData, 5000);
 </script>
+
+
+<!--start schlorship-->
+
+<script>
+document.querySelectorAll("#processedDocsLink")[1].addEventListener("click", function(e) {
+    e.preventDefault();
+
+    document.getElementById("mainContent").innerHTML = `
+
+        <h1 class="text-2xl font-bold mb-6">Scholarship Programs</h1>
+
+        <!-- KPI CARDS
+        <div class="grid grid-cols-3 gap-4 mb-6">
+
+            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                <p class="text-xs text-slate-500">Master's Degree</p>
+                <p class="text-2xl font-bold text-blue-600">25</p>
+            </div>
+
+            <div class="bg-green-50 p-4 rounded-lg text-center">
+                <p class="text-xs text-slate-500">Doctorate</p>
+                <p class="text-2xl font-bold text-green-600">12</p>
+            </div>
+
+            <div class="bg-purple-50 p-4 rounded-lg text-center">
+                <p class="text-xs text-slate-500">Short Courses</p>
+                <p class="text-2xl font-bold text-purple-600">18</p>
+            </div>
+
+        </div> -->
+
+        <!-- LIST OF SCHOLARS -->
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+
+            <h4 class="font-bold text-slate-800 mb-4">Scholarship Distribution</h4>
+
+            <div class="space-y-3 text-sm">
+
+                <div class="flex justify-between bg-slate-50 p-3 rounded">
+                    <span>SEAMEO Scholarships</span>
+                    <span class="font-semibold"> to be updated</span>
+                </div>
+
+                <div class="flex justify-between bg-slate-50 p-3 rounded">
+                    <span>CHED Scholarships</span>
+                    <span class="font-semibold">to be updated</span>
+                </div>
+
+                <div class="flex justify-between bg-slate-50 p-3 rounded">
+                    <span>DepEd Scholarships</span>
+                    <span class="font-semibold">to be updated</span>
+                </div>
+
+                <div class="flex justify-between bg-slate-50 p-3 rounded">
+                    <span>Local/Division Programs</span>
+                    <span class="font-semibold">to be updated</span>
+                </div>
+
+            </div>
+
+        </div>
+    `;
+});
+</script>
+<!--end schlorship-->
+
+
+
+
+
+
+
 
 <script>
 document.getElementById("aboutHRDLink").addEventListener("click", function(e) {
