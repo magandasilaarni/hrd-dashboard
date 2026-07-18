@@ -101,9 +101,12 @@ setInterval(loadPositionData, 5000);
 <body class="bg-slate-50 text-slate-800 min-h-screen flex">
 
     <!-- SIDEBAR -->
-    <aside id="sidebar"
-class="w-64 bg-slate-900 text-white fixed md:relative h-full z-50
+   <aside   id="sidebar"
+class="w-64 bg-slate-900 text-white fixed md:relative h-full overflow-y-auto z-50
 transform -translate-x-full md:translate-x-0 transition duration-300">
+<div id="overlay"
+class="fixed inset-0 bg-black/40 hidden z-40 md:hidden"
+onclick="toggleSidebar()"></div>
         <div>
             <!-- Logo / Brand -->
             <div class="p-6 flex items-center gap-3 border-b border-slate-800">
@@ -157,6 +160,10 @@ class="md:hidden p-2 text-slate-500">
         
         <!-- HEADER -->
         <header class="bg-white border-b px-4 py-4 flex flex-wrap justify-between items-center gap-3 sticky top-0 z-10">
+
+            <!-- ✅ ADD THIS -->
+
+                <button onclick="toggleSidebar()" class="md:hidden text-slate-600">☰ </button>
             <div>
                 <h1 class="text-2xl font-bold text-slate-900">HRD Overview</h1>
                 <p class="text-sm text-slate-500"> </p>
@@ -331,7 +338,7 @@ updateDateTime();
     <span class="material-symbols-outlined text-sm">add</span> Add New Training </button>
                 </div>
                 <div class="overflow-x-auto">
-2
+
 <table class="min-w-[700px] w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-50 text-slate-500 text-xs font-semibold uppercase border-b border-slate-200">
@@ -463,23 +470,23 @@ window.addEventListener("DOMContentLoaded", () => {
                 borderRadius: 6
             }]
         },
-        options: {
-            responsive: true,
-          maintainAspectRatio: false
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        autoSkip: false,
-                        maxRotation: 45,
-                        minRotation: 45
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: { precision: 0 }
-                }
+       options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        x: {
+            ticks: {
+                autoSkip: false,
+                maxRotation: 45,
+                minRotation: 45
             }
+        },
+        y: {
+            beginAtZero: true,
+            ticks: { precision: 0 }
+        }
+    }
+}
         }
     });
 }
@@ -825,7 +832,7 @@ async function loadPositionData() {
     const canvas = document.getElementById("positionChart");
     if (!canvas) return;
 
-    // ✅ CREATE ONLY ONCE
+    // ✅ create or update chart
     if (!positionChartInstance) {
         positionChartInstance = new Chart(canvas, {
             type: 'bar',
@@ -839,24 +846,22 @@ async function loadPositionData() {
             },
             options: {
                 responsive: true,
-                animation: false  // ✅ instant display
+                maintainAspectRatio: false
             }
         });
-    } 
-    // ✅ UPDATE ONLY (NO RELOAD = NO DELAY)
-    else {
+    } else {
         positionChartInstance.data.labels = labels;
         positionChartInstance.data.datasets[0].data = data;
         positionChartInstance.update();
     }
 }
 
-// ✅ LOAD ONCE → INSTANT
+// ✅ run once
 window.addEventListener("DOMContentLoaded", () => {
     loadPositionData();
 });
 
-// ✅ OPTIONAL REFRESH (slow, smooth)
+// ✅ optional refresh
 setInterval(loadPositionData, 15000);
 </script>
 
@@ -1219,8 +1224,11 @@ function togglePanel() {
 
 <script>
 function toggleSidebar() {
-    document.getElementById("sidebar")
-        .classList.toggle("-translate-x-full");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+
+    sidebar.classList.toggle("-translate-x-full");
+    overlay.classList.toggle("hidden");
 }
 </script>
 </body>
