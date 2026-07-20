@@ -352,11 +352,26 @@ updateDateTime();
 
             <!-- DATA TABLE SECTION -->
             <section class="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
-                <div class="p-6 border-b border-slate-200 flex justify-between items-center flex-wrap gap-4">
-                    <h4 class="font-bold text-slate-800">Current Programs</h4>
-                <button onclick="openModal()" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition flex items-center gap-2 cursor-pointer">
-    <span class="material-symbols-outlined text-sm">add</span> Add New Training </button>
-                </div>
+               <div class="p-6 border-b border-slate-200 flex justify-between items-center flex-wrap gap-4">
+
+    <div class="flex items-center gap-3">
+        <h4 class="font-bold text-slate-800">Current Programs</h4>
+
+       <select id="yearFilter" class="px-3 py-2 border border-slate-300 rounded-lg">
+    <option value="All">All Years</option>
+    <option value="2026">2026</option>
+    <option value="2025">2025</option>
+    <option value="2024">2024</option>
+</select>
+    </div>
+
+    <button onclick="openModal()"
+        class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition flex items-center gap-2 cursor-pointer">
+        <span class="material-symbols-outlined text-sm">add</span>
+        Add New Training
+    </button>
+
+</div>
                 <div class="overflow-x-auto">
 
 <table class="min-w-[700px] w-full text-left border-collapse">
@@ -373,47 +388,6 @@ updateDateTime();
     </tbody>
 </table>
 
-<!--old
-<table class="min-w-[700px] w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-50 text-slate-500 text-xs font-semibold uppercase border-b border-slate-200">
-                                <th class="px-6 py-4">Program Name</th>
-                                <th class="px-6 py-4">Target Personnel</th>
-                                <th class="px-6 py-4">Number of Target Personnel</th>
-                                <th class="px-6 py-4">Progress Status</th>
-                                <th class="px-6 py-4">Success Rate</th>
-                            </tr>
-                        </thead>
-                    	<tbody id="tableBody" class="divide-y divide-slate-100 text-sm font-medium text-slate-700">
-                            <tr>
-                                <td class="px-6 py-4 text-blue-600 font-semibold">Division-led Expansion Training for Division Trainers for the Revised Grades 6, 9, and 10 Curriculum</td>
-                                <td class="px-6 py-4">Teachers</td>
-                                <td class="px-6 py-4">2613</td>
-                                <td class="px-6 py-4">
-                                    <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full font-semibold">Completed</span>
-                                </td>
-                                <td class="px-6 py-4">100%</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 text-blue-600 font-semibold">DIVISION TRAINING-WORKSHOP ON THE IMPLEMENTATION OF REPUBLIC ACT NO. 12009 OR THE “NEW GOVERNMENT PROCUREMENT ACT (NGPA)”</td>
-                                <td class="px-6 py-4">Program/Proponent End-Users</td>
-                                <td class="px-6 py-4">to be counted</td>
-                                <td class="px-6 py-4">
-                                    <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">In Progress</Progress></span>
-                                </td>
-                                <td class="px-6 py-4">75%</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 text-blue-600 font-semibold">Training of Private School Teachers on the Revised Grades 6, 9, and 10 Curriculum</td>
-                                <td class="px-6 py-4">Private School Teacher</td>
-                                <td class="px-6 py-4">to be counted</td>
-                                <td class="px-6 py-4">
-                                    <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full font-semibold">to be Conducted</span>
-                                </td>
-                                <td class="px-6 py-4"> %</td>
-                            </tr>
-                        </tbody>
-                    </table>-->
                 </div>
             </section>
         </div>
@@ -1270,52 +1244,70 @@ function toggleSidebar() {
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
 <script>
-console.log(Papa);
+let allData = [];
 
+// Render table based on selected year
+function renderTable(selectedYear) {
+
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = '';
+
+    const filteredData = selectedYear === 'All'
+        ? allData
+        : allData.filter(row => row["Year"] === selectedYear);
+
+    filteredData.forEach(row => {
+
+        let statusClass = "bg-slate-100 text-slate-800";
+
+        if ((row["Progress Status"] || "").trim() === "Completed") {
+            statusClass = "bg-emerald-100 text-emerald-800";
+        } else if ((row["Progress Status"] || "").trim() === "In Progress") {
+            statusClass = "bg-amber-100 text-amber-800";
+        } else if ((row["Progress Status"] || "").trim() === "To Be Conducted") {
+            statusClass = "bg-blue-100 text-blue-800";
+        }
+
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <td class="px-6 py-4 text-blue-600 font-semibold">${row["Program Name"] || ""}</td>
+            <td class="px-6 py-4">${row["Target Personnel"] || ""}</td>
+            <td class="px-6 py-4">${row["Number of Target Personnel"] || ""}</td>
+            <td class="px-6 py-4">
+                <span class="${statusClass} text-xs px-2.5 py-1 rounded-full font-semibold">
+                    ${row["Progress Status"] || ""}
+                </span>
+            </td>
+            <td class="px-6 py-4">${row["Date Implemented"] || ""}</td>
+        `;
+
+        tableBody.appendChild(tr);
+    });
+}
+
+// Load CSV
 Papa.parse('trainings.csv', {
     download: true,
     header: true,
     skipEmptyLines: true,
 
     complete: function(results) {
-
-        const tableBody = document.getElementById('tableBody');
-
-        results.data.forEach(row => {
-
-            let statusClass = "bg-slate-100 text-slate-800";
-
-            if ((row["Progress Status"] || "").trim() === "Completed") {
-                statusClass = "bg-emerald-100 text-emerald-800";
-            } else if ((row["Progress Status"] || "").trim() === "In Progress") {
-                statusClass = "bg-amber-100 text-amber-800";
-            } else if ((row["Progress Status"] || "").trim() === "To Be Conducted") {
-                statusClass = "bg-blue-100 text-blue-800";
-            }
-
-            const tr = document.createElement('tr');
-
-            tr.innerHTML = `
-                <td class="px-6 py-4 text-blue-600 font-semibold">${row["Program Name"] || ""}</td>
-                <td class="px-6 py-4">${row["Target Personnel"] || ""}</td>
-                <td class="px-6 py-4">${row["Number of Target Personnel"] || ""}</td>
-                <td class="px-6 py-4">
-                    <span class="${statusClass} text-xs px-2.5 py-1 rounded-full font-semibold">
-                        ${row["Progress Status"] || ""}
-                    </span>
-                </td>
-                <td class="px-6 py-4">${row["Date Implemented"] || ""}</td>
-            `;
-
-            tableBody.appendChild(tr);
-        });
+        allData = results.data;
+        renderTable('All');
     },
 
     error: function(error) {
         console.error('Error loading CSV:', error);
     }
 });
+
+// Year filter
+document.getElementById('yearFilter').addEventListener('change', function() {
+    renderTable(this.value);
+});
 </script>
+
 
 </body>
 </html>
