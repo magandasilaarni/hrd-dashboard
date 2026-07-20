@@ -357,7 +357,7 @@ updateDateTime();
     <div class="flex items-center gap-3">
         <h4 class="font-bold text-slate-800">Current Programs</h4>
 
-       <select id="yearFilter" class="px-3 py-2 border border-slate-300 rounded-lg">
+     <select id="yearFilter" class="px-3 py-2 border border-slate-300 rounded-lg">
     <option value="All">All Years</option>
     <option value="2026">2026</option>
     <option value="2025">2025</option>
@@ -1252,9 +1252,11 @@ function renderTable(selectedYear) {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
 
-    const filteredData = selectedYear === 'All'
-        ? allData
-        : allData.filter(row => row["Year"] === selectedYear);
+   const filteredData = selectedYear === 'All'
+    ? allData
+    : allData.filter(row =>
+        String(row["Year"] || "").trim() === String(selectedYear).trim()
+      );
 
     filteredData.forEach(row => {
 
@@ -1292,10 +1294,14 @@ Papa.parse('trainings.csv', {
     header: true,
     skipEmptyLines: true,
 
-    complete: function(results) {
-        allData = results.data;
-        renderTable('All');
-    },
+  complete: function(results) {
+    allData = results.data;
+
+    console.log("Sample Row:", allData[0]);
+    console.log("Headers:", Object.keys(allData[0]));
+
+    renderTable('All');
+},
 
     error: function(error) {
         console.error('Error loading CSV:', error);
