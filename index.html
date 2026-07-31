@@ -200,238 +200,489 @@ setInterval(loadPositionData, 5000);
 
     <!-- MAIN CONTENT AREA -->
    <main class="flex-1 flex flex-col overflow-y-auto md:ml-25">
+    
+    <!-- HEADER -->
+    <header class="bg-white border-b px-4 py-4 flex flex-wrap justify-between items-center gap-3 sticky top-0 z-10">
+        <button onclick="toggleSidebar()" class="md:hidden text-slate-600">☰</button>
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900">HRD Overview</h1>
+            <p class="text-sm text-slate-500">School Governance and Operations Division</p>
+        </div>
         
-        <!-- HEADER -->
-        <header class="bg-white border-b px-4 py-4 flex flex-wrap justify-between items-center gap-3 sticky top-0 z-10">
+        <div class="flex items-center gap-4">
+            <button class="p-2 text-slate-400 hover:text-slate-600 relative">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            </button>
 
-            <!-- ✅ ADD THIS -->
+            <div class="text-sm text-right hidden sm:block">
+                <p id="currentDate" class="font-medium text-slate-700"></p>
+                <script>
+                function updateDateTime() {
+                  const now = new Date();
+                  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+                  document.getElementById("currentDate").textContent = now.toLocaleString('en-US', options);
+                }
+                setInterval(updateDateTime, 1000);
+                updateDateTime();
+                </script>
+                <p class="text-xs text-slate-400">Schools Division Office of Laguna</p>
+            </div>
+        </div>
+    </header>
 
-                <button onclick="toggleSidebar()" class="md:hidden text-slate-600">☰ </button>
+    <!-- DASHBOARD CONTAINER -->
+    <div id="mainContent" class="p-4 sm:p-6 lg:p-8 space-y-8 max-w-[1600px] w-full mx-auto">
+
+        <!-- ========================================== -->
+        <!-- 1. TRAININGS & DEVELOPMENT PAGE -->
+        <!-- ========================================== -->
+        <div id="trainingsPage" class="page-view space-y-8">
+            
+            <!-- METRIC CARDS SECTION -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+
+    <!-- CARD 1: TRAINED PERSONNEL -->
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="flex items-start justify-between gap-2">
             <div>
-                <h1 class="text-2xl font-bold text-slate-900">HRD Overview</h1>
-                <p class="text-sm text-slate-500"> </p>
-            </div>
-            
-            <div class="flex items-center gap-4">
-                
-                <button class="p-2 text-slate-400 hover:text-slate-600 relative">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-
-                
-                <div class="text-sm text-right hidden sm:block">
-
-                    
-                 
-<p id="currentDate" class="font-medium text-slate-700"></p>
-
-<script>
-function updateDateTime() {
-  const now = new Date();
-  const options = { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  };
-
-  document.getElementById("currentDate")
-    .textContent = now.toLocaleString('en-US', options);
-}
-
-setInterval(updateDateTime, 1000);
-updateDateTime();
-</script>
-
-                    <p class="text-xs text-slate-400">Schools Division Office of Laguna</p>
-                    <p class="text-xs text-slate-400">School Governance and Operations Division</p>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Trained Personnel</p>
+                <div class="inline-flex items-center gap-1.5 mt-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-xs font-semibold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                    <span>Year 2026</span>
                 </div>
             </div>
-        </header>
+            <div class="p-2.5 bg-blue-50/80 text-blue-600 rounded-xl ring-1 ring-blue-100 shrink-0">
+                <span class="material-symbols-outlined text-xl">groups</span>
+            </div>
+        </div>
 
-        <!-- DASHBOARD CONTAINER -->
-        <div id="mainContent" class="p-8 space-y-8 max-w-[1600px] w-full mx-auto">
-
-            
-            <!-- METRIC CARDS -->
-           <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1 -->
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                    <div>
-    <p class="text-sm font-medium text-slate-500">Trained Personnel</p>
-
-    <div class="mt-3">
-        <h3 class="text-2xl font-bold text-slate-900">2,555</h3>
-        <p class="text-sm text-slate-500">Teaching</p>
+        <div class="grid grid-cols-2 gap-2 mt-5 pt-3 border-t border-slate-100">
+            <div class="bg-slate-50/80 p-2.5 rounded-xl border border-slate-100/80">
+                <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">2,555</h3>
+                <p class="text-[11px] font-semibold text-slate-500 mt-0.5">Teaching</p>
+            </div>
+            <div class="bg-slate-50/80 p-2.5 rounded-xl border border-slate-100/80">
+                <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">80</h3>
+                <p class="text-[11px] font-semibold text-slate-500 mt-0.5">Non-Teaching</p>
+            </div>
+        </div>
     </div>
 
-    <div class="mt-3">
-        <h3 class="text-2xl font-bold text-slate-900">80</h3>
-        <p class="text-sm text-slate-500">Non-Teaching</p>
+    <!-- CARD 2: CERTIFICATES REQUEST COMPLETED -->
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="flex items-start justify-between gap-2">
+            <div>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Certificates Requests</p>
+                <p class="text-xs font-medium text-slate-500 mt-0.5">Completed per Activity</p>
+            </div>
+            <div class="p-2.5 bg-amber-50/80 text-amber-600 rounded-xl ring-1 ring-amber-100 shrink-0">
+                <span class="material-symbols-outlined text-xl">workspace_premium</span>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class="flex items-baseline gap-2">
+                <h3 class="text-3xl font-extrabold text-slate-900 tracking-tight">73</h3>
+                <span class="inline-flex items-center gap-0.5 text-xs font-bold text-emerald-600">
+                    <span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                </span>
+            </div>
+            <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-400 mt-1">
+                Active Year 2026
+            </span>
+        </div>
     </div>
 
-    <div class="mt-3">
-        <p class="text-sm font-medium text-slate-500">Year: 2026</p>
-    </div>
-</div>
+    <!-- CARD 3: NASH PDI PARTICIPANTS -->
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="flex items-start justify-between gap-2">
+            <div>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">NASH PDI Participants</p>
+                <h3 class="text-3xl font-extrabold text-slate-900 mt-1 tracking-tight">57</h3>
+            </div>
+            <div class="p-2.5 bg-emerald-50/80 text-emerald-600 rounded-xl ring-1 ring-emerald-100 shrink-0">
+                <span class="material-symbols-outlined text-xl">groups_3</span>
+            </div>
+        </div>
 
-                    <div class="p-3 bg-blue-50 text-blue-600 rounded-lg"><span class="material-symbols-outlined">groups</span></div>
+        <div class="mt-4 pt-3 border-t border-slate-100 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 font-medium">Phase 2 Qualifier</span>
+                <span class="font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded-md text-[11px]">33 / 58</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 font-medium">PPSH 3 Domains</span>
+                <span class="font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded-md text-[11px]">11</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 font-medium">w/Developmental</span>
+                <span class="font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded-md text-[11px]">47</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 4: BUDGET UTILIZATION -->
+    <div class="bg-slate-50/60 p-5 rounded-2xl border border-dashed border-slate-300 flex flex-col justify-between relative overflow-hidden">
+        <div class="flex items-start justify-between gap-2">
+            <div>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Budget Utilization</p>
+                <p class="text-xs font-medium text-slate-400 mt-0.5">Financial Tracking</p>
+            </div>
+            <div class="p-2.5 bg-slate-200/60 text-slate-400 rounded-xl shrink-0">
+                <span class="material-symbols-outlined text-xl">payments</span>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3 class="text-xl font-bold text-slate-400">Coming Soon</h3>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 mt-2 bg-slate-200/50 px-2.5 py-1 rounded-lg border border-slate-200">
+                <span class="material-symbols-outlined text-sm text-slate-400">construction</span> Under Development
+            </span>
+        </div>
+    </div>
+
+</section>
+
+<!-- ANALYTICS CARDS SECTION -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+    
+    <!-- TOTAL TRAININGS -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Trainings</span>
+            <div class="p-2.5 bg-slate-100 text-slate-700 rounded-xl">
+                <span class="material-symbols-outlined text-xl">model_training</span>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div id="totalPrograms" class="text-3xl font-extrabold text-slate-900 tracking-tight">0</div>
+            <p class="text-xs font-medium text-slate-400 mt-1">Total recorded programs</p>
+        </div>
+    </div>
+
+    <!-- ACTIVE SCHOLARSHIP -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">On-Going Scholarship</span>
+            <div class="p-2.5 bg-blue-50 text-blue-600 rounded-xl ring-1 ring-blue-100">
+                <span class="material-symbols-outlined text-xl">school</span>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div id="totalPersonnel" class="text-3xl font-extrabold text-slate-900 tracking-tight">0</div>
+            <p class="text-xs font-medium text-slate-400 mt-1">Total attendees reached</p>
+        </div>
+    </div>
+
+    <!-- COMPLETION RATE -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Completion Rate</span>
+            <div class="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl ring-1 ring-emerald-100">
+                <span class="material-symbols-outlined text-xl">check_circle</span>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div id="completionRate" class="text-3xl font-extrabold text-slate-900 tracking-tight">0.0%</div>
+            <p class="text-xs font-medium text-slate-400 mt-1">Programs completed ratio</p>
+        </div>
+    </div>
+
+    <!-- ACTIVE / PLANNED -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Active / Planned</span>
+            <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl ring-1 ring-amber-100">
+                <span class="material-symbols-outlined text-xl">pending_actions</span>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div id="activeTrainings" class="text-3xl font-extrabold text-slate-900 tracking-tight">0</div>
+            <p class="text-xs font-medium text-slate-400 mt-1">In progress or upcoming</p>
+        </div>
+    </div>
+
+</section>
+
+            <!-- CHART SECTION (TRAINED PERSONNEL BY POSITION) -->
+            <div class="processed-section p-6 rounded-xl border border-slate-200 shadow-xs bg-white">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="font-bold text-slate-800">Trained Personnel by Position</h4>
+                    <span class="text-xs text-slate-400">Live Visual Breakdown</span>
                 </div>
-                <!-- Card 2 -->
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-slate-500">Certificates Request Completed per Program and Activity</p>
-                        <h3 class="text-3xl font-bold text-slate-900 mt-1">73</h3>
-                        <span class="text-xs font-medium text-emerald-600 flex items-center mt-2">
-                            <span class="material-symbols-outlined text-xs mr-1">arrow_upward</span>Year 2026
-                        </span>
+                
+                <!-- CANVAS CONTAINER WITH FIXED MIN HEIGHT FOR CHART.JS -->
+                <div class="relative h-64 md:h-80 w-full">
+                    <canvas id="positionChart"></canvas>
+                </div>
+
+                <div id="positionList" class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm mt-4"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-blue-50/70 p-4 rounded-lg text-center border border-blue-100">
+                        <p class="text-xs text-slate-500">Division-led Training of Teachers on the Revised Grades 6, 9, and 10 Curriculum</p>
+                        <p class="text-xs font-semibold text-slate-400 mt-1">Total Trained</p>
+                        <p id="totalTrainedCurriculum" class="text-2xl font-bold text-blue-700 mt-1">2,555</p>
                     </div>
-                    <div class="p-3 bg-amber-50 text-amber-600 rounded-lg"><span class="material-symbols-outlined">workspace_premium</span></div>
-                </div>
-              <!-- Card 3 -->
-<div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
 
-    <!-- LEFT CONTENT -->
+                    <div class="bg-blue-50/70 p-4 rounded-lg text-center border border-blue-100">
+                        <p class="text-xs text-slate-500">Capacity Building on the Crafting of Professional Development Program Proposals</p>
+                        <p class="text-xs font-semibold text-slate-400 mt-1">Total Trained</p>
+                        <p id="totalTrainedCapBuilding" class="text-2xl font-bold text-blue-700 mt-1">80</p>
+                    </div>
+                </div>
+            </div>
+
+           <!-- DATA TABLE / YEAR SELECTOR SECTION -->
+<section class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
     <div>
-        <p class="text-sm font-medium text-slate-500">NASH PDI Participants</p>
-
-        <!-- MAIN NUMBER -->
-        <h3 class="text-4xl font-extrabold text-slate-900 mt-1">57</h3>
-
-        <!-- INLINE SMALL STATS -->
-        <div class="flex gap-4 mt-2 text-xs text-slate-500 items-center">
-            <span>
-                <span class="text-lg font-bold text-slate-900">11</span> meeting PPSH in 3 Domains
-            </span>
-            <span>
-                <span class="text-sm font-semibold text-slate-700">47</span> with Developmental Areas
-            </span>
-        </div>
+        <h3 class="text-lg font-bold text-slate-900 tracking-tight">Trainings & Seminars Directory</h3>
+        <p class="text-xs text-slate-500 mt-0.5">Select a year to view training logs or upload new CSV records.</p>
     </div>
 
-    <!-- SINGLE ICON -->
-    <div class="bg-green-100 p-3 rounded-lg">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-6 w-6 text-green-600"
-             fill="none"
-             viewBox="0 0 24 24"
-             stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 8v4l3 3"/>
-        </svg>
-    </div>
-
-</div>
-                <!-- Card 4 -->
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-slate-500">Budget Utilization</p>
-                        <h3 class="text-3xl font-bold text-slate-900 mt-1">Coming Soon</h3>
-                        <span class="text-xs font-medium text-rose-600 flex items-center mt-2">
-                            <span class="material-symbols-outlined text-xs mr-1">warning</span> coming soon remaining
-                        </span>
-                    </div>
-                    <div class="p-3 bg-rose-50 text-rose-600 rounded-lg"><span class="material-symbols-outlined">payments</span></div>
-                </div>
-            </section>
-
-            <!-- MID  SECTION -->
-
-         <section class="flex flex-col gap-6">
-            
-               
-               <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
-
-        <section class="flex flex-col gap-8"></section>
-     <hr class="border-slate-200">
-
-
-   
- <!-- ✅ TOP DOCUMENTS -->
-    <h5 class="text-sm font-semibold text-slate-600 mb-2"> </h5>
-    <div class="space-y-1 text-sm mb-4">
+    <!-- Controls Wrapper -->
+    <div class="flex items-center gap-3 w-full sm:w-auto flex-wrap sm:flex-nowrap">
         
-        <div class="flex justify-between"><span>   </span><span>    </span></div>
+        <!-- Year Select Filter -->
+        <div class="relative w-full sm:w-auto">
+            <select id="dashboardYearSelect" class="w-full appearance-none bg-white border border-slate-200 rounded-xl px-3.5 py-2 pr-9 text-sm font-medium text-slate-700 hover:border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all cursor-pointer">
+                <option value="2026">Year 2026</option>
+                <option value="2025">Year 2025</option>
+                <option value="2024">Year 2024</option>
+                <option value="All">All Years</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none">expand_more</span>
+        </div>
+
+        <!-- Import CSV Button -->
+        <label class="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-3.5 py-2 rounded-xl text-sm font-medium transition-all shadow-xs cursor-pointer shrink-0">
+            <span class="material-symbols-outlined text-lg text-slate-500">upload_file</span>
+            <span>Import CSV</span>
+            <input type="file" id="csvFileInput" accept=".csv" class="hidden" onchange="handleFileUpload(event)">
+        </label>
+
+        <!-- View Trainings (Triggers Pop-up) -->
+        <button onclick="openYearlyTrainingsModal()" class="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all shadow-xs hover:shadow-md cursor-pointer shrink-0">
+            <span class="material-symbols-outlined text-lg">open_in_new</span>
+            <span>View Trainings</span>
+        </button>
+
     </div>
-</div>
+</section>
 
-                <!-- Right: Department Distribution (Doughnut Chart) -->
-               
-<!-- Right: Personnel Distribution (No Chart) -->
-<div class="processed-section p-6 rounded-xl border border-slate-200 shadow-xs">
-    
-    <h4 class="font-bold text-slate-800 mb-4">
-        Trained Personnel by Position
-    </h4>
-    
-<div class="h-64 md:h-80">
+        <!-- ========================================== -->
+        <!-- 2. REWARDS & RECOGNITION PAGE -->
+        <!-- ========================================== -->
+        <div id="rewardsPage" class="page-view hidden">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                <h2 class="text-xl font-bold text-slate-900">Rewards & Recognition</h2>
+                <p class="text-slate-500 mt-1">Manage employee honors, awards, and commendations.</p>
+            </div>
+        </div>
 
-<canvas id="positionChart"></canvas>
+        <!-- ========================================== -->
+        <!-- 3. PROCESSED DOCUMENTS PAGE -->
+        <!-- ========================================== -->
+        <div id="processedDocsPage" class="page-view hidden">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                <h2 class="text-xl font-bold text-slate-900">Processed Documents</h2>
+                <p class="text-slate-500 mt-1">Track incoming and outgoing HRD documentation.</p>
+            </div>
+        </div>
 
-</div>
-    <div id="positionList" class="grid grid-cols-2 gap-3 text-sm"></div>
+        <!-- ========================================== -->
+        <!-- 4. SUB-OFFICES / L&D PAGE -->
+        <!-- ========================================== -->
+        <div id="subOfficesPage" class="">
+            <section class="bg-white rounded-xl border border-slate-200/80 shadow-xs p-6 relative">
+                
+                <!-- HEADER & SEARCH -->
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <h3 class="text-xl font-bold text-slate-900">L&D Participation by Sub-Office</h3>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                                <span class="material-symbols-outlined text-xs">location_city</span> 24 Sub-Offices
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-1">
+                            Tracks training coverage, personnel reach, and technical assistance needs across SDO Laguna.
+                        </p>
+                    </div>
 
-
-    <!-- TOTAL -->
-    <div class="mt-4 bg-blue-50 p-3 rounded text-center">
-        <p class="text-xs text-slate-400">Division-led Trainining of Teachers on the Revised Grades 6, 9, and 10 Curriculum</p>
-        <p class="text-xs text-slate-500">Total Trained</p>
-       <p id="totalTrained" class="text-xl font-bold text-blue-700">0</p>
-    </div>
-
-     <div class="mt-4 bg-blue-50 p-3 rounded text-center">
-        <p class="text-xs text-slate-400">Capacity Building on the Crafting of Professional Development Program Proposals for Teachers and School Leaders</p>
-        <p class="text-xs text-slate-500">Total Trained</p>
-       <p id="totalTrained" class="text-xl font-bold text-blue-700">80</p>
-    </div>
-
-</div>
-
-
-            <!-- DATA TABLE SECTION -->
-            <section class="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
-               <div class="p-6 border-b border-slate-200 flex justify-between items-center flex-wrap gap-4">
-
-    <div class="flex items-center gap-3">
-        <h4 class="font-bold text-slate-800">Current Programs</h4>
-
-     <select id="yearFilter" class="px-3 py-2 border border-slate-300 rounded-lg">
-    <option value="All">All Years</option>
-    <option value="2026">2026</option>
-    <option value="2025">2025</option>
-    <option value="2024">2024</option>
-</select>
-    </div>
-
-    <button onclick="openModal()"
-        class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition flex items-center gap-2 cursor-pointer">
-        <span class="material-symbols-outlined text-sm">add</span>
-        Add New Training
-    </button>
-
-</div>
-                <div class="overflow-x-auto">
-
-<table class="min-w-[700px] w-full text-left border-collapse">
-    <thead>
-        <tr class="bg-slate-50 text-slate-500 text-xs font-semibold uppercase border-b border-slate-200">
-            <th class="px-6 py-4">Program Name</th>
-            <th class="px-6 py-4">Target Personnel</th>
-            <th class="px-6 py-4">Number of Target Personnel</th>
-            <th class="px-6 py-4">Progress Status</th>
-            <th class="px-6 py-4">Date Implemented</th>
-        </tr>
-    </thead>
-    <tbody id="tableBody" class="divide-y divide-slate-100 text-sm font-medium text-slate-700">
-    </tbody>
-</table>
-
+                    <div class="relative min-w-[260px]">
+                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
+                        <input type="text" id="subOfficeSearch" onkeyup="filterSubOffices()" placeholder="Filter Sub-Office / Municipality..." 
+                            class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+                    </div>
                 </div>
+
+                <!-- SUB-OFFICES GRID CONTAINER -->
+                <div id="subOfficeContainer" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5 max-h-[500px] overflow-y-auto pr-1">
+                </div>
+
+                <!-- TOP & BOTTOM PERFORMERS PREVIEW -->
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-emerald-50/50 border border-emerald-200/60 rounded-xl p-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-emerald-100">
+                            <div class="flex items-center gap-2">
+                                <div class="p-1.5 bg-emerald-100 text-emerald-700 rounded-lg">
+                                    <span class="material-symbols-outlined text-sm">trending_up</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-slate-800">Top Performing Sub-Offices</h4>
+                            </div>
+                            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                                Highest Reach
+                            </span>
+                        </div>
+                        <ul class="mt-3 space-y-2 text-xs">
+                            <li class="flex items-center justify-between p-2 bg-white rounded-lg border border-emerald-100">
+                                <span class="font-semibold text-slate-700">1. Los Baños</span>
+                                <span class="text-slate-500 font-medium text-[11px]">Pending Data</span>
+                            </li>
+                            <li class="flex items-center justify-between p-2 bg-white rounded-lg border border-emerald-100">
+                                <span class="font-semibold text-slate-700">2. Santa Cruz</span>
+                                <span class="text-slate-500 font-medium text-[11px]">Pending Data</span>
+                            </li>
+                            <li class="flex items-center justify-between p-2 bg-white rounded-lg border border-emerald-100">
+                                <span class="font-semibold text-slate-700">3. Liliw</span>
+                                <span class="text-slate-500 font-medium text-[11px]">Pending Data</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-rose-50/50 border border-rose-200/60 rounded-xl p-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-rose-100">
+                            <div class="flex items-center gap-2">
+                                <div class="p-1.5 bg-rose-100 text-rose-700 rounded-lg">
+                                    <span class="material-symbols-outlined text-sm">handshake</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-slate-800">Technical Assistance Priority</h4>
+                            </div>
+                            <span class="text-[11px] font-semibold text-rose-700 bg-rose-100 px-2 py-0.5 rounded-full">
+                                TA Needed
+                            </span>
+                        </div>
+                        <ul class="mt-3 space-y-2 text-xs">
+                            <li class="flex items-center justify-between p-2 bg-white rounded-lg border border-rose-100">
+                                <span class="font-semibold text-slate-700">1. Pangil</span>
+                                <span class="text-slate-500 font-medium text-[11px]">Pending Data</span>
+                            </li>
+                            <li class="flex items-center justify-between p-2 bg-white rounded-lg border border-rose-100">
+                                <span class="font-semibold text-slate-700">2. Mabitac</span>
+                                <span class="text-slate-500 font-medium text-[11px]">Pending Data</span>
+                            </li>
+                            <li class="flex items-center justify-between p-2 bg-white rounded-lg border border-rose-100">
+                                <span class="font-semibold text-slate-700">3. Santa Maria</span>
+                                <span class="text-slate-500 font-medium text-[11px]">Pending Data</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </section>
         </div>
-    </main>
+
+    </div>
+</main>
+
+<!-- CHART.JS & PAGE LOGIC SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Global Chart Instance variable
+    window.positionChartInstance = null;
+
+    // 1. Initialize or Re-render the Position Chart
+    function renderPositionChart() {
+        const canvas = document.getElementById('positionChart');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+
+        // Destroy old chart instance to prevent canvas rendering glitches
+        if (window.positionChartInstance) {
+            window.positionChartInstance.destroy();
+        }
+
+        window.positionChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Teacher I-III', 'Master Teacher', 'Head Teacher', 'School Head', 'Non-Teaching'],
+                datasets: [{
+                    label: 'Trained Personnel',
+                    data: [1850, 420, 160, 125, 80],
+                    backgroundColor: ['#3b82f6', '#0ea5e9', '#06b6d4', '#10b981', '#f59e0b'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // 2. Render Sub-Offices Municipality List
+    const subOfficesList = [
+        "Alaminos", "Bay", "Calauan", "Cavinti", "Famy", "Kalayaan", 
+        "Liliw", "Los Baños", "Luisiana", "Lumban", "Mabitac", "Magdalena", 
+        "Majayjay", "Nagcarlan", "Paete", "Pagsanjan", "Pakil", "Pangil", 
+        "Pila", "Rizal", "Santa Cruz", "Santa Maria", "Siniloan", "Victoria"
+    ];
+
+    function renderSubOffices() {
+        const container = document.getElementById("subOfficeContainer");
+        if (container) {
+            container.innerHTML = subOfficesList.map(office => `
+                <div class="sub-office-card bg-slate-50/70 hover:bg-slate-100 p-3.5 rounded-lg border border-slate-200/60 flex items-center justify-between transition cursor-pointer">
+                    <span class="text-xs font-bold text-slate-800">${office}</span>
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                        <span class="material-symbols-outlined text-xs">sync</span> In Progress
+                    </span>
+                </div>
+            `).join('');
+        }
+    }
+
+    function filterSubOffices() {
+        const input = document.getElementById('subOfficeSearch').value.toLowerCase();
+        const cards = document.querySelectorAll('.sub-office-card');
+        cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(input) ? 'flex' : 'none';
+        });
+    }
+
+    // 3. Tab View Navigation Logic (Use this in your sidebar buttons)
+    function switchPage(pageId) {
+        document.querySelectorAll('.page-view').forEach(page => page.classList.add('hidden'));
+        const targetPage = document.getElementById(pageId);
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+            
+            // Re-trigger chart resize if navigating back to trainings page
+            if (pageId === 'trainingsPage') {
+                setTimeout(() => {
+                    renderPositionChart();
+                }, 50);
+            }
+        }
+    }
+
+    // Load Chart & Sub-Offices when DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        renderPositionChart();
+        renderSubOffices();
+    });
+</script>
 
     <!-- CHART SCRIPTS -->
     <script>
@@ -1420,7 +1671,252 @@ document.getElementById('yearFilter').addEventListener('change', function() {
 });
 </script>
 
+<script>
+function showPage(targetPageId) {
+    // Hide all pages
+    const pages = document.querySelectorAll('.page-view');
+    pages.forEach(page => page.classList.add('hidden'));
 
+    // Show selected page
+    const selectedPage = document.getElementById(targetPageId);
+    if (selectedPage) {
+        selectedPage.classList.remove('hidden');
+    }
+}
+
+// Bind click events to sidebar links
+document.getElementById('dashboardLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    showPage('trainingsPage');
+});
+
+document.getElementById('rewardsLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    showPage('rewardsPage');
+});
+
+document.getElementById('processedDocsLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    showPage('processedDocsPage');
+});
+
+document.getElementById('scholarshipLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    showPage('subOfficesPage');
+});
+</script>
+
+<!-- POP-UP MODAL FOR SELECTED YEAR -->
+<div id="trainingsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs transition-opacity">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden">
+        
+        <!-- Modal Header -->
+        <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
+            <div>
+                <h3 id="modalTitle" class="text-lg font-bold text-slate-900">Trainings & Seminars</h3>
+                <p class="text-xs text-slate-500">Viewing records for the selected year</p>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- Search within Pop-up -->
+                <div class="relative w-56">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none">search</span>
+                    <input type="text" id="modalSearchInput" oninput="renderModalTable()" placeholder="Search..." class="w-full pl-9 pr-3 py-1.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/10">
+                </div>
+
+                <!-- Close Button -->
+                <button onclick="closeTrainingsModal()" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition cursor-pointer">
+                    <span class="material-symbols-outlined text-xl">close</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Scrollable Table -->
+        <div class="overflow-y-auto flex-1 p-0">
+            <table class="w-full text-left border-collapse">
+                <thead class="sticky top-0 bg-slate-50 text-slate-500 text-xs font-semibold uppercase tracking-wider border-b border-slate-200 z-10">
+                    <tr>
+                        <th class="px-6 py-3.5">Activity Title</th>
+                        <th class="px-6 py-3.5">Target Personnel</th>
+                        <th class="px-6 py-3.5 text-center">Attendees</th>
+                        <th class="px-6 py-3.5">Progress Status</th>
+                        <th class="px-6 py-3.5">Date Implemented</th>
+                    </tr>
+                </thead>
+                <tbody id="modalTableBody" class="divide-y divide-slate-100 text-sm font-medium text-slate-700">
+                    <!-- Dynamic rows load here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-4 border-t border-slate-100 bg-slate-50/50 flex justify-between items-center text-xs text-slate-500 shrink-0">
+            <span id="modalRecordCount">Showing 0 records</span>
+            <button onclick="closeTrainingsModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition cursor-pointer">
+                Close
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>// Store loaded CSV rows globally
+let masterData = [];
+
+// Define the path to your hosted CSV file
+const CSV_FILE_PATH = 'trainings.csv'; 
+
+// AUTO-RUN ON PAGE LOAD
+document.addEventListener('DOMContentLoaded', () => {
+    autoLoadCSV();
+});
+
+// 1. Automatically fetch and parse the CSV file
+function autoLoadCSV() {
+    Papa.parse(CSV_FILE_PATH, {
+        download: true,       // Tells PapaParse to fetch the file from the server/folder
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+            console.log("Automatically loaded CSV Data:", results.data);
+            processCSVData(results.data);
+        },
+        error: function(err) {
+            console.error("Could not auto-load CSV file. Ensure 'trainings.csv' is in the root directory.", err);
+        }
+    });
+}
+
+// 2. Process data and extract 4-digit years safely
+function processCSVData(rawData) {
+    masterData = rawData.map((row, index) => {
+        const dateStr = row['Date Implemented'] || row['Date'] || '';
+        
+        // Extract 4-digit year (works for YYYY-MM-DD, MM/DD/YYYY, etc.)
+        const yearMatch = dateStr.match(/\b(20\d\d)\b/);
+        const year = yearMatch ? yearMatch[1] : 'Unknown';
+
+        return {
+            id: index + 1,
+            title: row['Activity Title'] || row['Title'] || 'Untitled Training',
+            target: row['Target Personnel'] || row['Target'] || 'N/A',
+            count: parseInt(row['Number of Target Personnel'] || row['Attendees']) || 0,
+            status: row['Progress Status'] || row['Status'] || 'Planned',
+            date: dateStr,
+            year: year
+        };
+    });
+
+    // Update main dashboard metrics automatically
+   // updateAnalytics(masterData);
+}
+
+// 3. Trigger Modal and Filter by Selected Year
+function openYearlyTrainingsModal() {
+    const modal = document.getElementById('trainingsModal');
+    if (!modal) return;
+
+    const selectedYear = document.getElementById('dashboardYearSelect')?.value || 'All';
+    
+    // Update Modal Title
+    const titleText = selectedYear === 'All' ? 'All Trainings & Seminars' : `Trainings & Seminars (${selectedYear})`;
+    const titleElem = document.getElementById('modalTitle');
+    if (titleElem) titleElem.innerText = titleText;
+
+    // Open Modal
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+
+    // Render filtered list
+    renderModalTable();
+}
+
+// 4. Render Table inside Modal
+function renderModalTable() {
+    const tbody = document.getElementById('modalTableBody');
+    if (!tbody) return;
+
+    const selectedYear = document.getElementById('dashboardYearSelect')?.value || 'All';
+    const searchQuery = document.getElementById('modalSearchInput')?.value.toLowerCase().trim() || '';
+
+    // Filter items matching the chosen year and search string
+    const filtered = masterData.filter(item => {
+        const matchesYear = (selectedYear === 'All') || (item.year === selectedYear);
+        const matchesSearch = item.title.toLowerCase().includes(searchQuery) || 
+                              item.target.toLowerCase().includes(searchQuery);
+        return matchesYear && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="px-6 py-12 text-center text-slate-400 font-normal">
+                    <span class="material-symbols-outlined text-4xl mb-2 text-slate-300">folder_off</span>
+                    <p class="text-sm">No trainings found for year <strong>${selectedYear}</strong>.</p>
+                </td>
+            </tr>`;
+        updateRecordCount(0);
+        return;
+    }
+
+    tbody.innerHTML = filtered.map(item => `
+        <tr class="hover:bg-slate-50/50 transition-colors">
+            <td class="px-6 py-4 font-semibold text-slate-900">${escapeHtml(item.title)}</td>
+            <td class="px-6 py-4 text-slate-600">${escapeHtml(item.target)}</td>
+            <td class="px-6 py-4 text-center">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">
+                    ${item.count.toLocaleString()}
+                </span>
+            </td>
+            <td class="px-6 py-4">${getStatusBadge(item.status)}</td>
+            <td class="px-6 py-4 text-slate-500">${item.date}</td>
+        </tr>
+    `).join('');
+
+    updateRecordCount(filtered.length);
+}
+
+// 5. Close Modal
+function closeTrainingsModal() {
+    document.getElementById('trainingsModal')?.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+}
+
+// Helper Functions
+function getStatusBadge(status) {
+    const s = status.toLowerCase();
+    if (s === 'completed') {
+        return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Completed</span>`;
+    } else if (s === 'in progress' || s === 'ongoing') {
+        return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> In Progress</span>`;
+    } else {
+        return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200/60"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Planned</span>`;
+    }
+}
+
+function updateAnalytics(data) {
+    const totalPrograms = data.length;
+    const totalPersonnel = data.reduce((sum, item) => sum + item.count, 0);
+    const completedCount = data.filter(item => item.status.toLowerCase() === 'completed').length;
+    const activeCount = data.filter(item => item.status.toLowerCase() !== 'completed').length;
+    const completionRate = totalPrograms > 0 ? ((completedCount / totalPrograms) * 100).toFixed(1) : '0.0';
+
+    if (document.getElementById('totalPrograms')) document.getElementById('totalPrograms').innerText = totalPrograms;
+    if (document.getElementById('totalPersonnel')) document.getElementById('totalPersonnel').innerText = totalPersonnel.toLocaleString();
+    if (document.getElementById('completionRate')) document.getElementById('completionRate').innerText = `${completionRate}%`;
+    if (document.getElementById('activeTrainings')) document.getElementById('activeTrainings').innerText = activeCount;
+}
+
+function updateRecordCount(count) {
+    const label = document.getElementById('modalRecordCount');
+    if (label) label.innerText = `Showing ${count} record${count === 1 ? '' : 's'}`;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.innerText = text;
+    return div.innerHTML;
+}</script>
 </body>
 </html>
 
