@@ -1058,12 +1058,6 @@ document.querySelectorAll("#processedDocsLink")[1].addEventListener("click", fun
 <!--end schlorship-->
 
 
-
-
-
-
-
-
 <script>
 document.getElementById("aboutHRDLink").addEventListener("click", function(e) {
     e.preventDefault();
@@ -1104,83 +1098,155 @@ document.getElementById("aboutHRDLink").addEventListener("click", function(e) {
 
         </div>
 
-        <div class="mt-8">
-            <div class="grid md:grid-cols-2 gap-4">
-                
-          <div class="mt-8 bg-slate-50 p-5 rounded-lg">   
-            <h2 class="text-xl font-bold text-slate-800 mb-4">
-                Core Functions of HRD
+       <div class="mt-8">
+   <div class="max-w-6xl mx-auto p-4 sm:p-6 space-y-8">
+
+    <!-- TOP SECTION: HRD Personnel -->
+    <div class="bg-slate-50/80 p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 tracking-tight">
+                HRD Personnel
             </h2>
- 
-            <ul class="space-y-3 text-slate-700">
-                <li>✅ Conduct Training Needs Analysis (TNA)</li>
-                <li>✅ Develop and implement Learning and Development Programs</li>
-                <li>✅ Manage Scholarship and Professional Development Opportunities</li>
-                <li>✅ Maintain Training and Development Information System (TDIS)</li>
-                <li>✅ Monitor and Evaluate Learning and Development Programs</li>
-                <li>✅ Prepare Annual Training Calendars and Reports</li>
-                <li>✅ Support Career Development and Succession Planning</li>
-            </ul>
-            
-            </div>
-<div class="mt-8 bg-slate-50 p-6 rounded-lg">
+            <p class="text-sm text-slate-500 mt-1">Human Resource Development Team</p>
+        </div>
 
-    <h2 class="text-xl font-bold text-slate-800 mb-8 text-center">HRD Personnel</h2>
+        <!-- Personnel Cards Grid (3 Columns on Desktop) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <!-- SEPS and EPS II -->
-    <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <!-- SEPS Card -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-slate-200/60 p-6 flex flex-col items-center text-center transition-all duration-300 relative overflow-hidden group h-full">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-emerald-600"></div>
 
-        <!-- SEPS -->
-        <div class="bg-white p-5 rounded-xl shadow-sm text-center">
+                <!-- Enlarged Profile Image (+50% size: w-40 h-40) -->
+                <div class="relative w-40 h-40 mb-5 mt-2 flex-shrink-0">
+                    <img 
+                        src="images/seps.jpg" 
+                        alt="Enrico G. Ortega" 
+                        class="w-full h-full object-cover rounded-full ring-4 ring-slate-100 shadow-sm group-hover:ring-emerald-100 transition-all duration-300"
+                    >
+                </div>
 
-                <img
-                src="images/seps.jpg"
-                alt="SEPS"
-                class="w-32 h-32 mx-auto rounded-full h3>
+                <div class="flex flex-col justify-between flex-grow w-full">
+                    <h3 class="text-base font-bold text-slate-800 tracking-tight leading-snug">
+                        Enrico G. Ortega, <span class="text-slate-500 font-normal">MaEd</span>
+                    </h3>
 
-                <p class="text-sm text-blue-600">
-                <h3 class="font-bold mt-4 text-slate-800"> Enrico G. Ortega, MaEd </h3>                
-                <p class="text-sm text-green-600"> Senior Education Program Specialist </p>
-         </div>
-
-             <!-- EPS II -->
-            <div class="bg-white p-5 rounded-xl shadow-sm text-center">
-
-                <img
-                src="images/eps2.jpg"
-                alt="EPS II"
-                class="w-32 h-32 mx-auto rounded-full h3>
-
-                <p class="text-sm text-blue-600">
-                <h3 class="font-bold mt-4 text-slate-800"> Laarni T. Estrada, MIT </h3>                       
-                <p class="text-sm text-green-600"> Education Program Specialist II </p>
+                    <div class="mt-4 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60 inline-block mx-auto">
+                        Senior Education Program Specialist
+                    </div>
+                </div>
             </div>
 
-         </div>
+            <!-- EPS II Card -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-slate-200/60 p-6 flex flex-col items-center text-center transition-all duration-300 relative overflow-hidden group h-full">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-emerald-600"></div>
 
-    <!-- Clerk -->
-    <div class="flex justify-center">
+                <!-- Enlarged Profile Image (+50% size: w-40 h-40) -->
+                <div class="relative w-40 h-40 mb-5 mt-2 flex-shrink-0">
+                    <img 
+                        src="images/eps2.jpg" 
+                        alt="Laarni T. Estrada" 
+                        class="w-full h-full object-cover rounded-full ring-4 ring-slate-100 shadow-sm group-hover:ring-emerald-100 transition-all duration-300"
+                    >
+                </div>
 
-        <div class="bg-white p-5 rounded-xl shadow-sm text-center w-full md:w-60">
+                <div class="flex flex-col justify-between flex-grow w-full">
+                    <h3 class="text-base font-bold text-slate-800 tracking-tight leading-snug">
+                        Laarni T. Estrada, <span class="text-slate-500 font-normal">MIT</span>
+                    </h3>
 
-            <img
-                src="images/clerk.jpg"
-                alt="Administrative Clerk"
-                class="w-32 h-32 mx-auto rounded-full h3>
-        
-                <p class="text-sm text-blue-600">
-                <h3 class="font-bold mt-4 text-slate-800"> Arlyn S. Clemeno </h3>                
-               <p class="text-sm text-green-600"> HRD Clerk </p>
+                    <div class="mt-4 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60 inline-block mx-auto">
+                        Education Program Specialist II
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clerk Card -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-slate-200/60 p-6 flex flex-col items-center text-center transition-all duration-300 relative overflow-hidden group h-full">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-emerald-600"></div>
+
+                <!-- Enlarged Profile Image (+50% size: w-40 h-40) -->
+                <div class="relative w-40 h-40 mb-5 mt-2 flex-shrink-0">
+                    <img 
+                        src="images/clerk.jpg" 
+                        alt="Arlyn S. Clemeno" 
+                        class="w-full h-full object-cover rounded-full ring-4 ring-slate-100 shadow-sm group-hover:ring-emerald-100 transition-all duration-300"
+                    >
+                </div>
+
+                <div class="flex flex-col justify-between flex-grow w-full">
+                    <h3 class="text-base font-bold text-slate-800 tracking-tight leading-snug">
+                        Arlyn S. Clemeno
+                    </h3>
+
+                    <div class="mt-4 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60 inline-block mx-auto">
+                        HRD Clerk
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
 
-</div>
-            
+    <!-- BOTTOM SECTION: Core Functions -->
+    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+        
+        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+            <div class="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 10 11-18 0 9 9 0 0118 0z"/>
+                </svg>
             </div>
-            
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 tracking-tight">
+                    Core Functions of HRD
+                </h2>
+                <p class="text-xs text-slate-500">Key duties & operational responsibilities</p>
             </div>
         </div>
+
+        <!-- 2-Column Grid for Functions -->
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-600 text-sm sm:text-base">
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 border border-slate-100 hover:bg-slate-50 transition-colors">
+                <span class="text-emerald-500 font-bold mt-0.5">✓</span>
+                <span>Conduct Training Needs Analysis (TNA)</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 border border-slate-100 hover:bg-slate-50 transition-colors">
+                <span class="text-emerald-500 font-bold mt-0.5">✓</span>
+                <span>Develop & implement Learning and Development Programs</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 border border-slate-100 hover:bg-slate-50 transition-colors">
+                <span class="text-emerald-500 font-bold mt-0.5">✓</span>
+                <span>Manage Scholarship & Professional Development Opportunities</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 border border-slate-100 hover:bg-slate-50 transition-colors">
+                <span class="text-emerald-500 font-bold mt-0.5">✓</span>
+                <span>Maintain Training & Development Information System (TDIS)</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 border border-slate-100 hover:bg-slate-50 transition-colors">
+                <span class="text-emerald-500 font-bold mt-0.5">✓</span>
+                <span>Monitor and Evaluate Learning and Development Programs</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 border border-slate-100 hover:bg-slate-50 transition-colors">
+                <span class="text-emerald-500 font-bold mt-0.5">✓</span>
+                <span>Prepare Annual Training Calendars and Reports</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 border border-slate-100 hover:bg-slate-50 transition-colors md:col-span-2">
+                <span class="text-emerald-500 font-bold mt-0.5">✓</span>
+                <span>Support Career Development and Succession Planning</span>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+
+        
+
+    </div>
+</div>
 
         <div class="mt-8 bg-slate-50 p-5 rounded-lg">
             <h2 class="text-xl font-bold text-slate-800 mb-3">
